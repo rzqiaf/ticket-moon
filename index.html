@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You 🤍</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg-dark:#0b0b0c;
+  --red-1:#6b0f1a;
+  --red-2:#4a0c14;
+  --red-3:#1a0b10;
+  --text:#f5f5f7;
+  --muted:#c9c9d1;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color:var(--text);
+  background:linear-gradient(
+    180deg,
+    var(--red-1) 0%,
+    var(--red-2) 35%,
+    var(--red-3) 70%,
+    var(--bg-dark) 100%
+  );
+  overflow-x:hidden;
+}
+
+/* ===== SURPRISE SCREEN ===== */
+#intro{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, #6b0f1a, #120305);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:opacity .9s ease;
+}
+
+.intro-box{
+  text-align:center;
+}
+
+.intro-box p{
+  font-family:"Playfair Display", serif;
+  font-size:22px;
+  margin-bottom:26px;
+}
+
+.intro-box button{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.6);
+  color:var(--text);
+  padding:12px 30px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.intro-box button:hover{
+  background:rgba(255,255,255,.12);
+}
+
+/* ===== LAYOUT ===== */
+.container{
+  max-width:900px;
+  margin:0 auto;
+  padding:0 20px;
+}
+
+header{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  text-align:center;
+}
+
+.hero{width:100%}
+
+h1{
+  font-family:"Playfair Display", serif;
+  font-size:clamp(42px,7vw,72px);
+  margin-bottom:18px;
+}
+
+.subtitle{
+  color:var(--muted);
+  font-size:15px;
+  max-width:520px;
+  margin:0 auto 36px;
+  line-height:1.6;
+}
+
+.btn-group{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+}
+
+.btn{
+  padding:10px 22px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  color:var(--text);
+  text-decoration:none;
+  backdrop-filter:blur(6px);
+}
+
+.btn:hover{background:rgba(255,255,255,.14)}
+
+section{margin:140px 0}
+
+.card{
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:32px;
+  padding:40px 26px;
+  backdrop-filter:blur(10px);
+}
+
+h2{
+  font-family:"Playfair Display", serif;
+  text-align:center;
+  margin-bottom:30px;
+}
+
+/* ===== PORTRAIT STACK ===== */
+.portrait-stack{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:26px;
+}
+
+.portrait{
+  width:100%;
+  max-width:320px;
+  aspect-ratio:3/4;
+  border-radius:22px;
+  background:center/cover no-repeat;
+  box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+/* ===== ALBUM BLEND ===== */
+.album-wrap{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+
+.album-cover{
+  width:200px;
+  aspect-ratio:1/1;
+  border-radius:16px;
+  background:center/cover no-repeat;
+  opacity:.6;
+  mix-blend-mode:soft-light;
+  filter:saturate(.9) contrast(.95);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+.album-glow{
+  position:absolute;
+  width:260px;
+  height:260px;
+  background:radial-gradient(circle, rgba(255,120,140,.35), transparent 60%);
+  filter:blur(50px);
+  z-index:-1;
+}
+
+.album-text{
+  font-size:13px;
+  color:var(--muted);
+  letter-spacing:.04em;
+}
+
+/* ===== QUOTE ===== */
+.quote{
+  font-family:"Playfair Display", serif;
+  font-size:clamp(22px,3vw,32px);
+  text-align:center;
+  max-width:620px;
+  margin:0 auto 14px;
+}
+
+/* ===== MUSIC CONTROL ===== */
+.music{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  background:rgba(20,20,24,.7);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  backdrop-filter:blur(10px);
+}
+
+.music button{
+  all:unset;
+  cursor:pointer;
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:60px 0;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SURPRISE -->
+<div id="intro">
+  <div class="intro-box">
+    <p>aku bikinin sesuatu buat kamu 🤍</p>
+    <button onclick="openSurprise()">Buka</button>
+  </div>
+</div>
+
+<audio id="bgm" src="foto/moon-daniel caesar.mp3" loop></audio>
+
+<header>
+  <div class="container hero">
+    <h1>For My Favorite Person</h1>
+    <p class="subtitle">
+      A soft, late-night space inspired by <em>Son of Spergy</em>.
+    </p>
+    <div class="btn-group">
+      <a href="#memories" class="btn">Memories</a>
+      <a href="#notes" class="btn">Notes</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+<section>
+  <div class="album-wrap">
+    <div class="album-glow"></div>
+    <div class="album-cover" style="background-image:url('foto/album.png')"></div>
+    <div class="album-text">Daniel Caesar — Son of Spergy</div>
+  </div>
+</section>
+
+<section id="memories">
+  <div class="card">
+    <h2>Moments I Hold Close</h2>
+    <div class="portrait-stack">
+      <div class="portrait" style="background-image:url('foto/abey1.jpeg')"></div>
+      <div class="portrait" style="background-image:url('foto/abey2.jpeg')"></div>
+      <div class="portrait" style="background-image:url('foto/abey3.jpeg')"></div>
+      <div class="portrait" style="background-image:url('foto/abey4.jpeg')"></div>
+    </div>
+  </div>
+</section>
+
+<section id="notes">
+  <div class="card">
+    <p class="quote">
+      “In a world that keeps pulling me everywhere, loving you feels like finally staying still.”
+    </p>
+    <p class="subtitle">— always, me</p>
+  </div>
+</section>
+
+</main>
+
+<div class="music">
+  <span>♫</span>
+  <button id="toggle">Play</button>
+</div>
+
+<footer>
+  Made with love, only for you 🤍
+</footer>
+
+<script>
+const intro = document.getElementById("intro");
+const audio = document.getElementById("bgm");
+const toggle = document.getElementById("toggle");
+let playing = false;
+
+function openSurprise(){
+  intro.style.opacity = "0";
+  setTimeout(()=>{
+    intro.style.display = "none";
+    audio.play();
+    toggle.textContent = "Pause";
+    playing = true;
+  },900);
+}
+
+toggle.addEventListener("click", async ()=>{
+  if(!playing){
+    await audio.play();
+    toggle.textContent = "Pause";
+  }else{
+    audio.pause();
+    toggle.textContent = "Play";
+  }
+  playing = !playing;
+});
+</script>
+
+</body>
+</html>
